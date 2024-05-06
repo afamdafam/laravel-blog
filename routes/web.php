@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Back\DashboardController;
+use App\Http\Controllers\Back\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,9 @@ Route::get('/about', function () {
 });
 
 Route::get('/dashboard',[DashboardController::class,'index']);
+
+Route::resource('/post', PostController::class);
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
