@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index()
     {
         return view('back.post.index' ,
-        ['posts' => Posts::with('User')->latest()->get()]);
+        ['posts' => Posts::where('user_id', auth()->user()->id)->with('User')->latest()->get()]);
     }
 
     /**
@@ -40,9 +40,9 @@ class PostController extends Controller
         $fileName = uniqid().'.'.$file->getClientOriginalextension();
         $file->storeAs('public/back/', $fileName);
 
-        $data['user_id'] = 1;
         $data['image'] = $fileName; 
         $data['slug'] = Str::slug($data['title']);
+        $data['user_id'] = auth()->user()->id;
 
         $data['title'] = preg_replace('/&nbsp;/', ' ', $data['title']);
         $data['desc'] = preg_replace('/&nbsp;/', ' ', $data['desc']);
