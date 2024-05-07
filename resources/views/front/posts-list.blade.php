@@ -16,7 +16,7 @@
                     <div class="post-preview">
                         <a href="{{ url('p/'.$post->slug) }}">
                             <div class="post-image">
-                                <img style="max-width: 100%; max-height: 100%;" src="{{ asset('storage/back/'.$post->image) }}">
+                                <img style="max-width: 75%; max-height: 75%;" src="{{ asset('storage/back/'.$post->image) }}">
                             </div>
                             <div class="post-content">
                                 <h2 class="post-title">{{ $post->title }}</h2>
