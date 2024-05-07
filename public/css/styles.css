@@ -10768,6 +10768,19 @@ header.masthead .post-heading .meta a {
 
 .post-preview > a {
   color: #212529;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.post-preview > a >.post-image {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 20px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.post-preview > a >.post-content {
+  flex: 1;
 }
 .post-preview > a:focus, .post-preview > a:hover {
   text-decoration: none;
@@ -10775,12 +10788,16 @@ header.masthead .post-heading .meta a {
 }
 .post-preview > a > .post-title {
   font-size: 1.875rem;
-  margin-top: 1.875rem;
+  margin-top: 0;
   margin-bottom: 0.625rem;
 }
 .post-preview > a > .post-subtitle {
   font-weight: 300;
   margin-bottom: 0.625rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 .post-preview > .post-meta {
   font-size: 1.125rem;

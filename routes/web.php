@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\PostController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PostController as FrontPostController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('front.welcome');
+// });
+
+Route::get('/',[HomeController::class,'index']);
+Route::get('/posts',[HomeController::class,'posts']);
+Route::get('/about',[HomeController::class,'about']);
+
+Route::get('/p/{slug}', [FrontPostController::class, 'show']);
+
+Route::middleware('auth')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index']);
+
+    Route::resource('/post', PostController::class);
+    
+    Route::group(['prefix' => 'laravel-filemanager'], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
 });
 
-Route::get('/about', function () {
-    return view('about');
-});
+Auth::routes();
 
-Route::get('/dashboard',[DashboardController::class,'index']);
-
-Route::resource('/post', PostController::class);
-
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

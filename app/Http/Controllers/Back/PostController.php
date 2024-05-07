@@ -44,6 +44,8 @@ class PostController extends Controller
         $data['image'] = $fileName; 
         $data['slug'] = Str::slug($data['title']);
 
+        $data['title'] = preg_replace('/&nbsp;/', ' ', $data['title']);
+        $data['desc'] = preg_replace('/&nbsp;/', ' ', $data['desc']);
         Posts::create($data);
         
 
@@ -88,6 +90,8 @@ class PostController extends Controller
         }
         
         $data['slug'] = Str::slug($data['title']);
+        $data['title'] = preg_replace('/&nbsp;/', ' ', $data['title']);
+        $data['desc'] = preg_replace('/&nbsp;/', ' ', $data['desc']);
 
         Posts::find($id)->update($data);
         
